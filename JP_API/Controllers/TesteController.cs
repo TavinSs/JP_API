@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
+using Modelo.Domain;
 
 namespace JP_API.Controllers
 {
     [Route("api/´[controller]")]
     [ApiController]
-    public class TestController : ControllerBase
+    public class TesteController : ControllerBase
     {
         [HttpGet("ObterIdAluno")]
         public async Task<IActionResult> ObterIdAluno()
