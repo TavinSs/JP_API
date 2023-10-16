@@ -10,5 +10,7 @@ namespace Modelo.Application.Interface
     public interface IAlunoApplication
     {
         Aluno BuscarAluno(int id);
+        void InserirAluno(Aluno aluno);
+        void EditarAluno(Aluno aluno);
     }
 }

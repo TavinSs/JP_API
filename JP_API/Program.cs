@@ -1,4 +1,3 @@
-using JP_API.Controllers;
 using Microsoft.EntityFrameworkCore;
 using Modelo.Infra.Repositorio;
 using Modelo.Infra;

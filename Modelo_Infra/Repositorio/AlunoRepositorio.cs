@@ -16,5 +16,17 @@ namespace Modelo.Infra.Repositorio
         {
             return _bancoContexto.Aluno.FirstOrDefault(x => x.Id == id);
         }
+
+        public void InserirAluno(Aluno aluno)
+        {
+            _bancoContexto.Aluno.Add(aluno);
+            _bancoContexto.SaveChanges();
+        }
+
+        public void EditarAluno(Aluno aluno)
+        {
+            _bancoContexto.Aluno.Update(aluno);
+            _bancoContexto.SaveChanges();
+        }
     }
 }

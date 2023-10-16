@@ -12,7 +12,7 @@ namespace Modelo.Infra.Mapeamento
 
             builder.HasKey(t => t.Id);
 
-            builder.Property(t => t.Nome).HasColumnName("Varchar(150)");
+            builder.Property(t => t.Nome).HasColumnType("varchar(50)");
         }
     }
 }

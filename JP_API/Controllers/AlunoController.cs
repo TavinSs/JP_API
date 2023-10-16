@@ -15,8 +15,8 @@ namespace JP_API.Controllers
         {
             _alunoApplication = alunoApplication;
         }
-        [HttpGet("BuscarDadosAluno/{Id}")]
 
+        [HttpGet("BuscarDadosAluno/{id}")]
         public async Task<IActionResult> BuscarDadosAluno(int id)
         {
 
@@ -24,6 +24,36 @@ namespace JP_API.Controllers
             {
                 var aluno = _alunoApplication.BuscarAluno(id);
                 return Ok(aluno);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Erro");
+            }
+        }
+
+        [HttpPost("AdicionarDadosAluno")]
+        public async Task<IActionResult> AdicionarDadosAluno([FromBody] Aluno aluno)
+        {
+
+            try
+            {
+                _alunoApplication.InserirAluno(aluno);
+                return Ok("Aluno Adicionado com Sucesso!");
+            }
+            catch (Exception)
+            {
+                return BadRequest("Erro");
+            }
+        }
+
+        [HttpPut("EditarDadosAluno")]
+        public async Task<IActionResult> EditarDadosAluno([FromBody] AlunoDto aluno)
+        {
+
+            try
+            {             
+                
+                return Ok("Aluno Editado com Sucesso!");
             }
             catch (Exception)
             {

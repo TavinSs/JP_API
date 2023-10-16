@@ -1,5 +1,7 @@
 ﻿using Modelo.Application.Interface;
 using Modelo.Domain;
+using Modelo.Infra;
+using Modelo.Infra.Repositorio;
 using Modelo.Infra.Repositorio.Interface;
 
 namespace Modelo.Application
@@ -17,5 +19,16 @@ namespace Modelo.Application
             var aluno = _alunorepositorio.BuscarId(id);
             return aluno;
         }
+
+        public void InserirAluno(Aluno aluno)
+        {
+            _alunorepositorio.InserirAluno(aluno);
+        }
+
+        public void EditarAluno(Aluno aluno)
+        {
+            _alunorepositorio.EditarAluno(aluno);
+        }
+            
     }
 }
