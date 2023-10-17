@@ -20,15 +20,29 @@ namespace Modelo.Application
             return aluno;
         }
 
-        public void InserirAluno(Aluno aluno)
+        public Retorno InserirAluno(Aluno aluno)
         {
-            try { 
-            _alunorepositorio.InserirAluno(aluno);
-            }
-            catch (Exception)
+            Retorno retorno = new();
+
+            if (aluno == null)
             {
-                
+                var mensagem = ValidaAluno(aluno);
+                if (mensagem == null)
+                {
+                    retorno.CarregaRetorno(false, mensagem, 200);
+                    return retorno;
+                }
+                _alunorepositorio.InserirAluno(aluno);
+
+                retorno.CarregaRetorno(true, "Aluno(a) Adicionado(a) com Sucesso!", 200);
             }
+            else
+            {
+
+            }
+             
+            
+           
         }
 
         public void EditarAluno(AlunoDto aluno)
