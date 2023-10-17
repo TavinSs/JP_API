@@ -22,7 +22,13 @@ namespace Modelo.Application
 
         public void InserirAluno(Aluno aluno)
         {
+            try { 
             _alunorepositorio.InserirAluno(aluno);
+            }
+            catch (Exception)
+            {
+                
+            }
         }
 
         public void EditarAluno(AlunoDto aluno)
