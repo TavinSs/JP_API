@@ -25,10 +25,15 @@ namespace Modelo.Application
             _alunorepositorio.InserirAluno(aluno);
         }
 
-        public void EditarAluno(Aluno aluno)
+        public void EditarAluno(AlunoDto aluno)
         {
             _alunorepositorio.EditarAluno(aluno);
         }
-            
+
+        public void DeletarAluno(AlunoDto aluno)
+        {
+            _alunorepositorio.DeletarAluno(aluno);
+        }
+
     }
 }

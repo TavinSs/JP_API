@@ -11,6 +11,7 @@ namespace Modelo.Application.Interface
     {
         Aluno BuscarAluno(int id);
         void InserirAluno(Aluno aluno);
-        void EditarAluno(Aluno aluno);
+        void EditarAluno(AlunoDto alunoDto);
+        void DeletarAluno(AlunoDto alunoDto);
     }
 }

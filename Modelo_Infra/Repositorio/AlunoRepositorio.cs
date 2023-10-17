@@ -23,9 +23,24 @@ namespace Modelo.Infra.Repositorio
             _bancoContexto.SaveChanges();
         }
 
-        public void EditarAluno(Aluno aluno)
+        public void EditarAluno(AlunoDto alunoDto)
         {
+            Aluno aluno = new ();
+            aluno.Id = alunoDto.Id;
+            aluno.Nome = alunoDto.Nome;
+            aluno.Idade = alunoDto.Idade;
+            aluno.Matricula = alunoDto.Matricula;
+            aluno.Cep = alunoDto.Cep;
+
             _bancoContexto.Aluno.Update(aluno);
+            _bancoContexto.SaveChanges();
+        }
+        public void DeletarAluno(AlunoDto alunoDto)
+        {
+            Aluno aluno = new();
+            aluno.Id = alunoDto.Id;
+
+            _bancoContexto.Aluno.Remove(aluno);
             _bancoContexto.SaveChanges();
         }
     }

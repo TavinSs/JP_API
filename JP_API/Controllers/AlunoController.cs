@@ -47,17 +47,30 @@ namespace JP_API.Controllers
         }
 
         [HttpPut("EditarDadosAluno")]
-        public async Task<IActionResult> EditarDadosAluno([FromBody] AlunoDto aluno)
+        public async Task<IActionResult> EditarDadosAluno([FromBody] AlunoDto alunoDto)
         {
 
             try
-            {             
-                
+            {
+                _alunoApplication.EditarAluno(alunoDto);
                 return Ok("Aluno Editado com Sucesso!");
             }
             catch (Exception)
             {
                 return BadRequest("Erro");
+            }
+        }
+        [HttpDelete("DeletarAluno")]
+        public async Task<IActionResult> ExcluirAluno([FromBody]AlunoDto alunoDto)
+        {
+            try
+            {
+                _alunoApplication.DeletarAluno(alunoDto);
+                return Ok("Aluno Delete com Sucesso!");
+            }
+            catch (Exception)
+            {
+                return BadRequest("erro");
             }
         }
     }
