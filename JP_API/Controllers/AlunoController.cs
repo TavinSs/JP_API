@@ -19,26 +19,38 @@ namespace JP_API.Controllers
         [HttpGet("BuscarDadosAluno/{id}")]
         public async Task<IActionResult> BuscarDadosAluno(int id)
         {
+            Retorno<Aluno> retorno = new(null);
 
             try
             {
                 var aluno = _alunoApplication.BuscarAluno(id);
-                return Ok(aluno);
+                if(aluno != null)
+                {
+                    retorno.CarregaRetorno(aluno, true, "Consulta realizada com sucesso!", 200);
+                }
+                else
+                {
+                    retorno.CarregaRetorno(aluno, true, $"aluno com o {id} não foi encontrado ou não existe", 204);
+                }
+                
+                return Ok(retorno);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest("Erro");
+                retorno.CarregaRetorno(false, e.Message, 400);
+                return BadRequest(retorno);
             }
         }
 
         [HttpPost("AdicionarDadosAluno")]
         public async Task<IActionResult> AdicionarDadosAluno([FromBody] Aluno aluno)
         {
+            Retorno retorno = new();
 
             try
             {
-                _alunoApplication.InserirAluno(aluno);
-                return Ok("Aluno Adicionado com Sucesso!");
+                retorno = _alunoApplication.InserirAluno(aluno);
+                return Ok(retorno);
             }
             catch (Exception)
             {
@@ -49,15 +61,18 @@ namespace JP_API.Controllers
         [HttpPut("EditarDadosAluno")]
         public async Task<IActionResult> EditarDadosAluno([FromBody] AlunoDto alunoDto)
         {
+            Retorno<AlunoDto> retorno = new(null);
 
             try
             {
                 _alunoApplication.EditarAluno(alunoDto);
-                return Ok("Aluno Editado com Sucesso!");
+                retorno.CarregaRetorno(alunoDto, true, "Aluno editado com sucesso!", 200);
+                return Ok(retorno);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest("Erro");
+                retorno.CarregaRetorno(false, e.Message, 400);
+                return BadRequest(retorno);
             }
         }
         [HttpDelete("DeletarAluno")]

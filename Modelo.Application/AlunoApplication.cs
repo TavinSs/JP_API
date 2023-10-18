@@ -27,7 +27,8 @@ namespace Modelo.Application
             if (aluno == null)
             {
                 var mensagem = ValidaAluno(aluno);
-                if (mensagem == null)
+
+                if (mensagem != null)
                 {
                     retorno.CarregaRetorno(false, mensagem, 200);
                     return retorno;
@@ -38,11 +39,10 @@ namespace Modelo.Application
             }
             else
             {
-
+                retorno.CarregaRetorno(true, "Nenhum dado fo informado.", 200);
             }
-             
-            
-           
+
+            return retorno;
         }
 
         public void EditarAluno(AlunoDto aluno)
@@ -53,6 +53,19 @@ namespace Modelo.Application
         public void DeletarAluno(AlunoDto aluno)
         {
             _alunorepositorio.DeletarAluno(aluno);
+        }
+
+        private string ValidaAluno(Aluno aluno)
+        {
+            string mensagem = "";
+
+            if (!aluno.Nome.Any())
+                mensagem = "Não é possivel inserir o aluno sem nome.";
+
+            if (aluno.Nome.Length > 50)
+                mensagem = "O nome do aluno deve possuir até 50 caracteres.";
+
+            return mensagem;
         }
 
     }
