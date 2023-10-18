@@ -65,6 +65,14 @@ namespace Modelo.Application
             if (aluno.Nome.Length > 50)
                 mensagem = "O nome do aluno deve possuir até 50 caracteres.";
 
+            if (aluno.Idade.Min() < 10)
+                mensagem = "O aluno deve ter pelo menos 10 anos";
+
+            if (!aluno.Cep.Any())
+                mensagem = "Não é possivel inserir o aluno sem o cep";
+
+            if (aluno.Cep.Equals(9))
+                mensagem = "O Cep tem que ser nesse formato: 00000-000";
             return mensagem;
         }
 
