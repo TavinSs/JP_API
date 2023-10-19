@@ -24,8 +24,9 @@ namespace Modelo.Application
         {
             Retorno retorno = new();
 
-            if (aluno == null)
-            {
+            if (aluno.Nome =="" && aluno.Cep =="" && aluno.Idade == "" && aluno.Matricula =="" )
+                retorno.CarregaRetorno(true, "Nenhum dado foi informado.", 200);
+            
                 var mensagem = ValidaAluno(aluno);
 
                 if (mensagem != null)
@@ -36,11 +37,8 @@ namespace Modelo.Application
                 _alunorepositorio.InserirAluno(aluno);
 
                 retorno.CarregaRetorno(true, "Aluno(a) Adicionado(a) com Sucesso!", 200);
-            }
-            else
-            {
-                retorno.CarregaRetorno(true, "Nenhum dado fo informado.", 200);
-            }
+            
+            
 
             return retorno;
         }
@@ -65,14 +63,24 @@ namespace Modelo.Application
             if (aluno.Nome.Length > 50)
                 mensagem = "O nome do aluno deve possuir até 50 caracteres.";
 
-            if (aluno.Idade.Min() < 10)
+            if (!aluno.Idade.Any())
+                mensagem = "Não é possivel adicionar o aluno sem idade";
+
+            if (aluno.Idade.Length < 2)
                 mensagem = "O aluno deve ter pelo menos 10 anos";
+
+            if (aluno.Matricula.Any())
+                mensagem = "Não é possivel adicionar aluno sem uma matricula";
+
+            if (aluno.Matricula.Length <= 9)
+                mensagem = "A matricula deve ter 10 digitos";
 
             if (!aluno.Cep.Any())
                 mensagem = "Não é possivel inserir o aluno sem o cep";
 
-            if (aluno.Cep.Equals(9))
+            if (aluno.Cep.Length < 9)
                 mensagem = "O Cep tem que ser nesse formato: 00000-000";
+
             return mensagem;
         }
 
